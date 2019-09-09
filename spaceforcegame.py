@@ -33,6 +33,7 @@ bullet_img = pygame.image.load(path.join(img_dir, "bullet_short_single.png"))
 player_img = pygame.image.load(path.join(img_dir, 'WO84-wu-X3.png'))
 npc_img = pygame.image.load(path.join(img_dir, 'CX16-X3.png'))
 friendly_img = pygame.image.load(path.join(img_dir, 'DKO-api-X3.png'))
+logo_img = pygame.image.load(path.join(img_dir, 'spaceforcelogo.png'))
 
 
 def new_npc():
@@ -55,10 +56,9 @@ def new_enemy():
 def show_go_screen():
     bg_rect = background.get_rect()
     screen.blit(background, bg_rect)
-    draw_text(screen, "Space Force Prime!", 64, WIDTH / 2, HEIGHT / 4)
-    draw_text(screen, "Arrow keys move, Space to fire", 22,
-              WIDTH / 2, HEIGHT / 2)
-    draw_text(screen, "Press a key to begin", 18, WIDTH / 2, HEIGHT * 3 / 4)
+    draw_text(screen, "Space Force Prime!", 64, WIDTH / 1.3, HEIGHT / 8)
+    draw_text(screen, "Arrow keys move, Space to fire", 22, WIDTH / 1.55, HEIGHT / 1.2)
+    draw_text(screen, "Press a key to begin", 22, WIDTH / 1.7, HEIGHT * 3.8 / 4)
     pygame.display.flip()
     waiting = True
     while waiting:
