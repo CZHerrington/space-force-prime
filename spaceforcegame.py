@@ -1,8 +1,8 @@
 import pygame
 import random
-# from os import path
+from os import path
 
-
+img_dir = path.join(path.dirname(__file__), 'img')
 # define screen and refresh rate
 WIDTH = 720
 HEIGHT = 720
@@ -81,8 +81,10 @@ class Star(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((50, 50))
-        self.image.fill((BLUE))
+        # self.image = pygame.Surface((50, 50))
+        # self.image.fill((BLUE))
+        self.image = pygame.transform.scale(player_img, (64, 56))
+        # self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
 
         self.rect.centerx = WIDTH / 2
@@ -188,6 +190,10 @@ class Package(Projectile):
     #     self.rect.move_ip(0, self.speedy)
     #     if self.rect.bottom < 0:
     #         self.kill()
+# Load images
+
+player_img = pygame.image.load(path.join(img_dir, 'WO84-wu-X3.png'))
+
 
 # create sprites and sprite groups
 all_sprites = pygame.sprite.Group()
