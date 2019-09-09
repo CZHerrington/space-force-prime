@@ -4,8 +4,8 @@ import random
 
 
 # define screen and refresh rate
-WIDTH = 360
-HEIGHT = 640
+WIDTH = 720
+HEIGHT = 720
 FPS = 30
 
 # define colors'
@@ -15,12 +15,14 @@ BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
 YELLOW = (255, 255, 0)
 BROWN = (165, 42, 42)
+WHITE = (255, 255, 255)
 
 # initial pygame and create game window
 pygame.init()
 # pygame.mixer.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+background = pygame.Surface(screen.get_size())
 pygame.display.set_caption('Space Force Prime')
 clock = pygame.time.Clock()
 
@@ -32,6 +34,30 @@ def newnpc():
     all_sprites.add(newn)
     npcs.add(newn)
 
+# generate random star
+def generate_stars(speed, radius, num):
+    for i in range(num):
+        w = random.randrange(0, WIDTH)
+        h = random.randrange(0, HEIGHT)
+        stars.add(Star(w, h, speed, radius))
+
+class Star(pygame.sprite.Sprite):
+    def __init__(self, x, y, speed, radius):
+        pygame.sprite.Sprite.__init__(Star, self)
+        self.x = x
+        self.y = y
+        self.speed = speed
+        self.radius = radius
+
+    def update(self):
+        self.y += self.speed
+        if self.x > WIDTH:
+            self.x = 0
+        if self.y > HEIGHT:
+            self.y = 0
+
+    def display(self, screen):
+        pygame.draw.circle(screen, WHITE, (self.x, self.y), self.radius)
 
 # class for ship controlled by player
 class Player(pygame.sprite.Sprite):
@@ -146,8 +172,15 @@ class Package(Projectile):
 
 # create sprites and sprite groups
 all_sprites = pygame.sprite.Group()
+stars = pygame.sprite.Group()
 npcs = pygame.sprite.Group()
 projectiles = pygame.sprite.Group()
+
+# Game initialization
+# Generate random stars
+generate_stars(4, 1, 100)
+generate_stars(6, 2, 10)
+generate_stars(8, 3, 5)
 
 player = Player()
 all_sprites.add(player)
@@ -184,6 +217,12 @@ while running:
 
     # Draw / render screen
     screen.fill(BLACK)
+
+    # add stars
+    for star in stars:
+        star.update()
+        star.display(screen)
+
     all_sprites.draw(screen)
     pygame.display.flip()
 
