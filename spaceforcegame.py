@@ -60,6 +60,8 @@ def show_go_screen():
     draw_text(screen, "Space Force Prime!", 64, WIDTH / 1.3, HEIGHT / 8)
     draw_text(screen, "Arrow keys move, Space to fire", 22, WIDTH / 1.55, HEIGHT / 1.2)
     draw_text(screen, "Press a key to begin", 22, WIDTH / 1.7, HEIGHT * 3.8 / 4)
+    logo_img_scaled = pygame.transform.scale(logo_img, (int(694 / 2), int(864 / 2)))
+    screen.blit(logo_img_scaled, (150, 150))
     pygame.display.flip()
     waiting = True
     while waiting:
