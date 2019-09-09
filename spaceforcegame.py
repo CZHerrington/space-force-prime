@@ -1,6 +1,8 @@
 import pygame
 import random
-# from os import path
+
+from os import path
+img_dir = path.join(path.dirname(__file__), 'img')
 
 
 # define screen and refresh rate
@@ -19,6 +21,7 @@ WHITE = (255, 255, 255)
 
 # initialize pygame and create game window
 pygame.init()
+
 # pygame.mixer.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -26,13 +29,27 @@ background = pygame.Surface(screen.get_size())
 pygame.display.set_caption('Space Force Prime')
 clock = pygame.time.Clock()
 
+#define resources
+bullet_img = pygame.image.load(path.join(img_dir, "bullet_short_single.png"))
 
 
 def newnpc():
-    n = [Npc(), Friendly()]
-    newn = random.choice(n)
-    all_sprites.add(newn)
-    npcs.add(newn)
+    n = random.random()
+    if n > 0.5: new_enemy()
+    else: new_friendly()
+
+def new_friendly():
+    nnpc = Friendly()
+    all_sprites.add(nnpc)
+    npcs.add(nnpc)
+    deliveries.add(nnpc)
+
+def new_enemy():
+    nnpc = Npc()
+    all_sprites.add(nnpc)
+    npcs.add(nnpc)
+    enemies.add(nnpc)
+
 
 def draw_health_bar(surf, x, y, remaining_health):
     if remaining_health < 0:
@@ -161,9 +178,8 @@ class Friendly(Npc):
 class Projectile(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        
-        self.image = pygame.Surface((10, 30))
-        self.image.fill((GREEN))
+        self.image = bullet_img
+        # self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.rect.bottom = y
         self.rect.centerx = x
@@ -193,6 +209,9 @@ class Package(Projectile):
 all_sprites = pygame.sprite.Group()
 stars = pygame.sprite.Group()
 npcs = pygame.sprite.Group()
+deliveries = pygame.sprite.Group()
+enemies = pygame.sprite.Group()
+
 projectiles = pygame.sprite.Group()
 
 # Game initialization
@@ -225,7 +244,7 @@ while running:
     # update sprites
     all_sprites.update()
 
-    # check projectile collision with npc
+    # check projectile collision with npcs
     hits = pygame.sprite.groupcollide(npcs, projectiles, True, True)
     for hit in hits:
         score += 1
