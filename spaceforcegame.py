@@ -8,7 +8,7 @@ WIDTH = 720
 HEIGHT = 720
 FPS = 30
 
-# define colors'
+# define colors
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
@@ -17,7 +17,7 @@ YELLOW = (255, 255, 0)
 BROWN = (165, 42, 42)
 WHITE = (255, 255, 255)
 
-# initial pygame and create game window
+# initialize pygame and create game window
 pygame.init()
 # pygame.mixer.init()
 
@@ -33,6 +33,24 @@ def newnpc():
     newn = random.choice(n)
     all_sprites.add(newn)
     npcs.add(newn)
+
+def draw_health_bar(surf, x, y, remaining_health):
+    if remaining_health < 0:
+        remaining_health = 0
+    bar_length = 150
+    bar_height = 15
+    filled_bar = remaining_health * bar_length / 100
+    outline_rect = pygame.Rect(x, y, bar_length, bar_height)
+    fill_rect = pygame.Rect(x, y, filled_bar, bar_height)
+    pygame.draw.rect(surf, GREEN, fill_rect)
+    pygame.draw.rect(surf, WHITE, outline_rect, 2)
+
+def draw_text(surf, text, size, x, y):
+    font = pygame.font.SysFont('arial', size)
+    text_surface = font.render(text, True, WHITE)
+    text_rect = text_surface.get_rect()
+    text_rect.topright = (x, y)
+    surf.blit(text_surface, text_rect)
 
 # generate random star
 def generate_stars(speed, radius, num):
@@ -71,6 +89,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.bottom = HEIGHT - 30
         self.speedx = 0
         self.speedy = 0
+        self.health = 100
         
     def update(self):
         self.speedx = 0
@@ -187,6 +206,7 @@ all_sprites.add(player)
 for i in range(10):
     newnpc()
 
+score = 0
 # game loop
 running = True
 while running:
@@ -208,12 +228,16 @@ while running:
     # check projectile collision with npc
     hits = pygame.sprite.groupcollide(npcs, projectiles, True, True)
     for hit in hits:
+        score += 1
         newnpc()
 
     # check npc collisions with player
-    playerhits = pygame.sprite.spritecollide(player, npcs, False)
+    playerhits = pygame.sprite.spritecollide(player, npcs, True)
     if playerhits:
-        running = False
+        player.health -= 40
+        newnpc()
+        if player.health <= 0:
+            running = False
 
     # Draw / render screen
     screen.fill(BLACK)
@@ -224,6 +248,8 @@ while running:
         star.display(screen)
 
     all_sprites.draw(screen)
+    draw_health_bar(screen, 10, 10, player.health)
+    draw_text(screen, 'SCORE: ' + str(score), 32, WIDTH - 10, 10)
     pygame.display.flip()
 
 pygame.quit()
