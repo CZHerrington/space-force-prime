@@ -77,6 +77,7 @@ def draw_health_bar(surf, x, y, remaining_health):
     filled_bar = remaining_health * bar_length / 100
     outline_rect = pygame.Rect(x, y, bar_length, bar_height)
     fill_rect = pygame.Rect(x, y, filled_bar, bar_height)
+    pygame.draw.rect(surf, RED, outline_rect)
     pygame.draw.rect(surf, GREEN, fill_rect)
     pygame.draw.rect(surf, WHITE, outline_rect, 2)
 
