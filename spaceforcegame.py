@@ -137,7 +137,7 @@ class Player(pygame.sprite.Sprite):
     def shoot_package(self):
         package = Package(self.rect.centerx, self.rect.top)
         all_sprites.add(package)
-        projectiles.add(package)
+        packages.add(package)
 
 
 # general class for all npc's
@@ -214,6 +214,7 @@ deliveries = pygame.sprite.Group()
 enemies = pygame.sprite.Group()
 
 projectiles = pygame.sprite.Group()
+packages = pygame.sprite.Group()
 
 # Game initialization
 # Generate random stars
@@ -246,8 +247,23 @@ while running:
     all_sprites.update()
 
     # check projectile collision with npcs
-    hits = pygame.sprite.groupcollide(npcs, projectiles, True, True)
-    for hit in hits:
+    enemy_hits = pygame.sprite.groupcollide(enemies, projectiles, True, True)
+    for hit in enemy_hits:
+        score += 1
+        newnpc()
+
+    friendly_hits = pygame.sprite.groupcollide(deliveries, projectiles, True, True)
+    for hit in friendly_hits:
+        score -= 1
+        newnpc()
+
+    enemy_package_hits = pygame.sprite.groupcollide(enemies, packages, True, True)
+    for hit in enemy_package_hits:
+        score -= 1
+        newnpc()
+
+    friendly_package_hits = pygame.sprite.groupcollide(deliveries, packages, True, True)
+    for hit in friendly_package_hits:
         score += 1
         newnpc()
 
