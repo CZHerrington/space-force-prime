@@ -30,6 +30,9 @@ clock = pygame.time.Clock()
 
 #define resources
 bullet_img = pygame.image.load(path.join(img_dir, "bullet_short_single.png"))
+player_img = pygame.image.load(path.join(img_dir, 'WO84-wu-X3.png'))
+npc_img = pygame.image.load(path.join(img_dir, 'CX16-X3.png'))
+friendly_img = pygame.image.load(path.join(img_dir, 'DKO-api-X3.png'))
 
 
 def newnpc():
@@ -148,8 +151,10 @@ class Player(pygame.sprite.Sprite):
 class Npc(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((50, 50))
-        self.image.fill((RED))
+        # self.image = pygame.Surface((50, 50))
+        # self.image.fill((RED))
+        self.image = pygame.transform.scale(npc_img, (50, 50))
+        self.image = pygame.transform.rotate(self.image, 180)
         self.rect = self.image.get_rect()
 
         self.rect.x = random.randrange(WIDTH - self.rect.width)
@@ -171,7 +176,8 @@ class Npc(pygame.sprite.Sprite):
 class Friendly(Npc):
     def __init__(self):
         super().__init__()
-        self.image.fill((YELLOW))
+        self.image = pygame.transform.scale(friendly_img, (50, 50))
+        self.image = pygame.transform.rotate(self.image, 180)
         
 
 
@@ -207,7 +213,7 @@ class Package(Projectile):
     #         self.kill()
 # Load images
 
-player_img = pygame.image.load(path.join(img_dir, 'WO84-wu-X3.png'))
+
 
 
 # create sprites and sprite groups
