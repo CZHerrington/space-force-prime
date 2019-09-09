@@ -28,10 +28,6 @@ background = pygame.Surface(screen.get_size())
 pygame.display.set_caption('Space Force Prime')
 clock = pygame.time.Clock()
 
-#define resources
-bullet_img = pygame.image.load(path.join(img_dir, "bullet_short_single.png"))
-
-
 def newnpc():
     n = random.random()
     if n > 0.5: new_enemy()
@@ -207,8 +203,8 @@ class Package(Projectile):
     #         self.kill()
 # Load images
 
+bullet_img = pygame.image.load(path.join(img_dir, "bullet_short_single.png"))
 player_img = pygame.image.load(path.join(img_dir, 'WO84-wu-X3.png'))
-
 
 # create sprites and sprite groups
 all_sprites = pygame.sprite.Group()
