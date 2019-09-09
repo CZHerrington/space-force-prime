@@ -28,7 +28,7 @@ background = pygame.Surface(screen.get_size())
 pygame.display.set_caption('Space Force Prime')
 clock = pygame.time.Clock()
 
-def newnpc():
+def new_npc():
     n = random.random()
     if n > 0.5: new_enemy()
     else: new_friendly()
@@ -45,6 +45,22 @@ def new_enemy():
     npcs.add(nnpc)
     enemies.add(nnpc)
 
+def show_go_screen():
+    bg_rect = background.get_rect()
+    screen.blit(background, bg_rect)
+    draw_text(screen, "Space Force Prime!", 64, WIDTH / 2, HEIGHT / 4)
+    draw_text(screen, "Arrow keys move, Space to fire", 22,
+              WIDTH / 2, HEIGHT / 2)
+    draw_text(screen, "Press a key to begin", 18, WIDTH / 2, HEIGHT * 3 / 4)
+    pygame.display.flip()
+    waiting = True
+    while waiting:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYUP:
+                waiting = False
 
 def draw_health_bar(surf, x, y, remaining_health):
     if remaining_health < 0:
@@ -217,6 +233,8 @@ projectiles = pygame.sprite.Group()
 packages = pygame.sprite.Group()
 
 # Game initialization
+show_go_screen()
+
 # Generate random stars
 generate_stars(4, 1, 100)
 generate_stars(6, 2, 10)
@@ -225,7 +243,7 @@ generate_stars(8, 3, 5)
 player = Player()
 all_sprites.add(player)
 for i in range(10):
-    newnpc()
+    new_npc()
 
 score = 0
 # game loop
@@ -250,28 +268,28 @@ while running:
     enemy_hits = pygame.sprite.groupcollide(enemies, projectiles, True, True)
     for hit in enemy_hits:
         score += 1
-        newnpc()
+        new_npc()
 
     friendly_hits = pygame.sprite.groupcollide(deliveries, projectiles, True, True)
     for hit in friendly_hits:
         score -= 1
-        newnpc()
+        new_npc()
 
     enemy_package_hits = pygame.sprite.groupcollide(enemies, packages, True, True)
     for hit in enemy_package_hits:
         score -= 1
-        newnpc()
+        new_npc()
 
     friendly_package_hits = pygame.sprite.groupcollide(deliveries, packages, True, True)
     for hit in friendly_package_hits:
         score += 1
-        newnpc()
+        new_npc()
 
     # check npc collisions with player
     playerhits = pygame.sprite.spritecollide(player, npcs, True)
     if playerhits:
         player.health -= 40
-        newnpc()
+        new_npc()
         if player.health <= 0:
             running = False
 
