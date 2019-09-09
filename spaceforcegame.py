@@ -34,6 +34,7 @@ player_img = pygame.image.load(path.join(img_dir, 'WO84-wu-X3.png'))
 npc_img = pygame.image.load(path.join(img_dir, 'CX16-X3.png'))
 friendly_img = pygame.image.load(path.join(img_dir, 'DKO-api-X3.png'))
 logo_img = pygame.image.load(path.join(img_dir, 'spaceforcelogo.png'))
+package_img = pygame.image.load(path.join(img_dir, 'package.png'))
 
 
 def new_npc():
@@ -217,8 +218,9 @@ class Projectile(pygame.sprite.Sprite):
 class Package(Projectile):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.image = pygame.Surface((20, 10))
-        self.image.fill((BROWN))
+        self.image = pygame.transform.scale(package_img, (30, 30))
+        # self.image = pygame.Surface((20, 10))
+        # self.image.fill((BROWN))
     #     self.rect.bottom = y
     #     self.rect.centerx = x
     #     self.speedy = -5
@@ -264,9 +266,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_d:
                 player.shoot()
-            if event.key == pygame.K_z:
+            if event.key == pygame.K_a:
                 player.shoot_package()
 
     # update sprites
