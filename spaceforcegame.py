@@ -102,6 +102,7 @@ while running:
 
     enemy_package_hits = pygame.sprite.groupcollide(enemies, packages, True, True)
     for hit in enemy_package_hits:
+        package_misdelivered_sound.play()
         score -= 1
         new_npc()
 
@@ -114,6 +115,7 @@ while running:
     # check npc collisions with player
     playerhits = pygame.sprite.spritecollide(player, npcs, True)
     if playerhits:
+        asteroid_collision_sound.play()
         player.health -= 40
         new_npc()
         if player.health <= 0:
