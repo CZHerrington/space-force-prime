@@ -83,6 +83,10 @@ while running:
         score -= 1
         new_npc()
 
+    pygame.sprite.groupcollide(asteroids, projectiles, False, True)
+
+    pygame.sprite.groupcollide(asteroids, packages, False, True)
+
     enemy_package_hits = pygame.sprite.groupcollide(enemies, packages, True, True)
     for hit in enemy_package_hits:
         score -= 1

@@ -4,16 +4,17 @@ from settings import *
 from sprites import *
 
 # methods for generating npcs
-def new_asteroid():
-    asteroid = Asteroid()
-    all_sprites.add(asteroid)
-    asteroids.add(asteroid)
-    npcs.add(asteroid)
 
 def new_npc():
     n = random.random()
     if n > 0.5: new_enemy()
     else: new_friendly()
+
+def new_asteroid():
+    asteroid = Asteroid()
+    all_sprites.add(asteroid)
+    asteroids.add(asteroid)
+    npcs.add(asteroid)
 
 def new_friendly():
     nnpc = Friendly()
