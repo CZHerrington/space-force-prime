@@ -15,7 +15,7 @@ def show_go_screen():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            if event.type == pygame.KEYUP:
+            if event.type == pygame.KEYDOWN:
                 waiting = False
     screen.blit(instructions2, (0, 0))
     pygame.display.flip()
@@ -25,5 +25,5 @@ def show_go_screen():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            if event.type == pygame.KEYUP:
+            if event.type == pygame.KEYDOWN:
                 waiting = False
