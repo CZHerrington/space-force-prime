@@ -9,6 +9,7 @@ from stars_background import *
 from projectiles import *
 from player import *
 from start_screens import *
+from sounds import *
 
 # initialize pygame and create game window
 pygame.init()
@@ -33,7 +34,7 @@ def game_over():
                 pygame.quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                   pygame.quit()
+                    pygame.quit()
                 elif event.key==pygame.K_RETURN:
                     player.reset()
                     for sprite in npcs:
@@ -76,12 +77,14 @@ while running:
     # check projectile collision with npcs
     enemy_hits = pygame.sprite.groupcollide(enemies, projectiles, True, True)
     for hit in enemy_hits:
+        weapon_hit_sound.play()
         score += 1
         new_npc()
 
     friendly_hits = pygame.sprite.groupcollide(deliveries, projectiles, True, True)
     for hit in friendly_hits:
         score -= 1
+        weapon_hit_sound.play()
         new_npc()
 
     pygame.sprite.groupcollide(asteroids, projectiles, False, True)
@@ -90,17 +93,20 @@ while running:
 
     enemy_package_hits = pygame.sprite.groupcollide(enemies, packages, True, True)
     for hit in enemy_package_hits:
+        package_misdelivered_sound.play()
         score -= 1
         new_npc()
 
     friendly_package_hits = pygame.sprite.groupcollide(deliveries, packages, True, True)
     for hit in friendly_package_hits:
         score += 1
+        package_delivered_sound.play()
         new_npc()
 
     # check npc collisions with player
     playerhits = pygame.sprite.spritecollide(player, npcs, True)
     if playerhits:
+        asteroid_collision_sound.play()
         player.health -= 40
         new_npc()
         if player.health <= 0:
