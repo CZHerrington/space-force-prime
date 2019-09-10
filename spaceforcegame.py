@@ -1,7 +1,6 @@
 import pygame
 import random
 import text_scroll
-from constants import *
 from sprites import *
 from settings import *
 
@@ -9,11 +8,6 @@ from settings import *
 pygame.init()
 
 # pygame.mixer.init()
-
-# screen = pygame.display.set_mode((WIDTH, HEIGHT))
-# background = pygame.Surface(screen.get_size())
-# pygame.display.set_caption('Space Force Prime')
-# clock = pygame.time.Clock()
 
 def new_npc():
     n = random.random()
