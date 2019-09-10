@@ -23,6 +23,7 @@ score = 0
 
 def game_over():
     screen.blit(game_over_img, (0, 0))
+    draw_text(screen, 'SCORE: ' + str(score), 32, WIDTH - 70, 10)
     pygame.display.flip()
     wait = True
     while wait:
@@ -98,8 +99,8 @@ while running:
         player.health -= 40
         new_npc()
         if player.health <= 0:
-            score = 0
             game_over()
+            score = 0
 
     # Draw / render screen
     screen.fill(BLACK)
