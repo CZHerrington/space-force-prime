@@ -47,6 +47,7 @@ def game_over():
                     show_go_screen()
                     wait = False
 
+pygame.mixer.music.play(loops = -1)
 show_go_screen()
 
 all_sprites.add(player)
