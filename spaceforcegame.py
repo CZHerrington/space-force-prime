@@ -1,23 +1,8 @@
 import pygame
 import random
 import text_scroll
-
-from os import path
-img_dir = path.join(path.dirname(__file__), 'img')
-
-# define screen and refresh rate
-WIDTH = 720
-HEIGHT = 720
-FPS = 30
-
-# define colors
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-BLACK = (0, 0, 0)
-YELLOW = (255, 255, 0)
-BROWN = (165, 42, 42)
-WHITE = (255, 255, 255)
+from constants import *
+from sprites import *
 
 # initialize pygame and create game window
 pygame.init()
@@ -28,19 +13,6 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 background = pygame.Surface(screen.get_size())
 pygame.display.set_caption('Space Force Prime')
 clock = pygame.time.Clock()
-
-#define resources
-bullet_img = pygame.image.load(path.join(img_dir, "bullet_short_single.png"))
-player_img = pygame.image.load(path.join(img_dir, 'WO84-wu-X3.png'))
-npc_img = pygame.image.load(path.join(img_dir, 'CX16-X3.png'))
-friendly_img = pygame.image.load(path.join(img_dir, 'DKO-api-X3.png'))
-logo_img = pygame.image.load(path.join(img_dir, 'spaceforcelogo.png'))
-package_img = pygame.image.load(path.join(img_dir, 'package.png'))
-asteroid1 = pygame.image.load(path.join(img_dir, 'asteroid1.png'))
-asteroid2_img = pygame.image.load(path.join(img_dir, 'asteroid2.png'))
-asteroid3_img = pygame.image.load(path.join(img_dir, 'asteroid3.png'))
-instructions1 = pygame.image.load(path.join(img_dir, 'go_screen.png'))
-instructions2 = pygame.image.load(path.join(img_dir, 'howtoplay.png'))
 
 def new_npc():
     n = random.random()
@@ -223,7 +195,7 @@ class Projectile(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.bottom = y
         self.rect.centerx = x
-        self.speedy = -5
+        self.speedy = -12
 
     def update(self):
         # self.rect.y += self.speedy
@@ -239,7 +211,7 @@ class Package(Projectile):
         # self.image.fill((BROWN))
     #     self.rect.bottom = y
     #     self.rect.centerx = x
-    #     self.speedy = -5
+        self.speedy = -4
     # def update(self):
     #     # self.rect.y += self.speedy
     #     self.rect.move_ip(0, self.speedy)
