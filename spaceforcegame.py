@@ -35,7 +35,9 @@ npc_img = pygame.image.load(path.join(img_dir, 'CX16-X3.png'))
 friendly_img = pygame.image.load(path.join(img_dir, 'DKO-api-X3.png'))
 logo_img = pygame.image.load(path.join(img_dir, 'spaceforcelogo.png'))
 package_img = pygame.image.load(path.join(img_dir, 'package.png'))
-
+asteroid1 = pygame.image.load(path.join(img_dir, 'asteroid1.png'))
+asteroid2_img = pygame.image.load(path.join(img_dir, 'asteroid2.png'))
+asteroid3_img = pygame.image.load(path.join(img_dir, 'asteroid3.png'))
 
 def new_npc():
     n = random.random()
