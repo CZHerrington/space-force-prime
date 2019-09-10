@@ -26,6 +26,11 @@ def new_enemy():
     npcs.add(nnpc)
     enemies.add(nnpc)
 
+def new_asteroid():
+    asteroid = Asteroid()
+    all_sprites.add(asteroid)
+    asteroids.add(asteroid)
+
 def show_go_screen():
     bg_rect = background.get_rect()
     screen.blit(background, bg_rect)
@@ -173,6 +178,12 @@ class Npc(pygame.sprite.Sprite):
             self.rect.x = random.randrange(WIDTH - self.rect.width)
             self.rect.y = -50
 
+class Asteroid(Npc):
+    def __init__(self):
+        super().__init__()
+        n = random.randint(0,2)
+        asteroids = [asteroid1_img, asteroid2_img, asteroid3_img]
+        self.image = pygame.transform.scale(asteroids[n], (50, 50))
 
 class Friendly(Npc):
     def __init__(self):
@@ -222,7 +233,7 @@ stars = pygame.sprite.Group()
 npcs = pygame.sprite.Group()
 deliveries = pygame.sprite.Group()
 enemies = pygame.sprite.Group()
-
+asteroids = pygame.sprite.Group()
 projectiles = pygame.sprite.Group()
 packages = pygame.sprite.Group()
 
@@ -241,6 +252,9 @@ player = Player()
 all_sprites.add(player)
 for i in range(10):
     new_npc()
+
+for i in range(10):
+    new_asteroid()
 
 score = 0
 # game loop
