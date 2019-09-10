@@ -16,3 +16,13 @@ asteroid3_img = pygame.image.load(path.join(img_dir, 'asteroid3.png'))
 instructions1 = pygame.image.load(path.join(img_dir, 'go_screen.png'))
 instructions2 = pygame.image.load(path.join(img_dir, 'howtoplay.png'))
 game_over_img = pygame.image.load(path.join(img_dir, 'game_over.png'))
+
+# create sprites and sprite groups
+all_sprites = pygame.sprite.Group()
+stars = pygame.sprite.Group()
+npcs = pygame.sprite.Group()
+deliveries = pygame.sprite.Group()
+enemies = pygame.sprite.Group()
+
+projectiles = pygame.sprite.Group()
+packages = pygame.sprite.Group()
