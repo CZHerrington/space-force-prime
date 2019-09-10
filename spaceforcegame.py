@@ -179,6 +179,7 @@ class Friendly(Npc):
         super().__init__()
         self.image = pygame.transform.scale(friendly_img, (50, 50))
         self.image = pygame.transform.rotate(self.image, 180)
+        self.speedy = 1.5
         
 
 
@@ -227,22 +228,27 @@ projectiles = pygame.sprite.Group()
 packages = pygame.sprite.Group()
 
 # Game initialization
+score = 0
+player = Player()
 
 # game intro
-text_scroll.intro()
-show_go_screen()
+# text_scroll.intro()
 
-# Generate random stars
-generate_stars(4, 1, 100)
-generate_stars(6, 2, 10)
-generate_stars(8, 3, 5)
+def initialize_game():
+    show_go_screen()
+    score = 0
 
-player = Player()
-all_sprites.add(player)
-for i in range(10):
-    new_npc()
+    # Generate random stars
+    generate_stars(4, 1, 100)
+    generate_stars(6, 2, 10)
+    generate_stars(8, 3, 5)
 
-score = 0
+    all_sprites.add(player)
+    for i in range(10):
+        new_npc()
+
+initialize_game()
+
 # game loop
 running = True
 while running:
@@ -288,7 +294,17 @@ while running:
         player.health -= 40
         new_npc()
         if player.health <= 0:
-            running = False
+            screen.blit(game_over_img, (0, 0))
+            pygame.display.flip()
+            wait = True
+            while wait:
+                pygame.time.delay(2000)
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        running = False
+                    elif event.type == pygame.KEYDOWN:
+                        initialize_game()
+                        running = True
 
     # Draw / render screen
     screen.fill(BLACK)
