@@ -61,7 +61,10 @@ def intro():
     screen = get_screen(720,720)
     while screen:
         event = pygame.event.wait()
+
         if event.type == pygame.QUIT:
+            screen = None
+        elif event.type == pygame.KEYDOWN:
             screen = None
         elif event.type == pygame.VIDEORESIZE:
             screen = get_screen(event.w, event.h)
