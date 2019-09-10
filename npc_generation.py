@@ -12,14 +12,23 @@ asteroid_num = 0
 explosion_anim = {}
 explosion_anim['lg'] = []
 explosion_anim['sm'] = []
-for i in range(9):
-    filename = 'regularExplosion0{}.png'.format(i)
+explosion_anim['laser'] = []
+
+for i in range(8):
+    filename = 'explosion{}.png'.format(i + 1)
     img = pygame.image.load(path.join(img_dir, filename)).convert()
     img.set_colorkey(BLACK)
     img_lg = pygame.transform.scale(img, (75, 75))
     explosion_anim['lg'].append(img_lg)
     img_sm = pygame.transform.scale(img, (32, 32))
     explosion_anim['sm'].append(img_sm)
+
+for i in range(9):
+    filename = 'laser_explosion{}.png'.format(i + 1)
+    img = pygame.image.load(path.join(img_dir, filename)).convert()
+    img.set_colorkey(BLACK)
+    img_lg = pygame.transform.scale(img, (75, 75))
+    explosion_anim['laser'].append(img_lg)
 
 # methods for generating npcs
 def new_npc():
