@@ -17,18 +17,44 @@ pygame.init()
 
 # game intro
 text_scroll.intro()
+
+player = Player()
+score = 0
+
+def game_over():
+    screen.blit(game_over_img, (0, 0))
+    pygame.display.flip()
+    wait = True
+    while wait:
+        pygame.time.delay(250)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                   pygame.quit()
+                elif event.key==pygame.K_RETURN:
+                    player.reset()
+                    for sprite in npcs:
+                        sprite.kill()
+                    for sprite in asteroids:
+                        sprite.kill()
+                    for i in range(10):
+                        new_npc()
+                    for i in range(5):
+                        new_asteroid()
+                    show_go_screen()
+                    wait = False
+
 show_go_screen()
 
-# create player and npcs
-player = Player()
 all_sprites.add(player)
 for i in range(10):
     new_npc()
-
+    
 for i in range(5):
     new_asteroid()
 
-score = 0
 # game loop
 running = True
 while running:
@@ -72,7 +98,8 @@ while running:
         player.health -= 40
         new_npc()
         if player.health <= 0:
-            running = False
+            score = 0
+            game_over()
 
     # Draw / render screen
     screen.fill(BLACK)
@@ -81,7 +108,7 @@ while running:
     for star in stars:
         star.update()
         star.display(screen)
-
+    
     all_sprites.draw(screen)
     draw_health_bar(screen, 10, 10, player.health)
     draw_text(screen, 'SCORE: ' + str(score), 32, WIDTH - 70, 10)
