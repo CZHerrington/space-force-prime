@@ -1,33 +1,34 @@
 import pygame
 import random
 import text_scroll
+from settings import *
 
 from os import path
 img_dir = path.join(path.dirname(__file__), 'img')
 
 # define screen and refresh rate
-WIDTH = 720
-HEIGHT = 720
-FPS = 30
+# WIDTH = 720
+# HEIGHT = 720
+# FPS = 30
 
-# define colors
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-BLACK = (0, 0, 0)
-YELLOW = (255, 255, 0)
-BROWN = (165, 42, 42)
-WHITE = (255, 255, 255)
+# # define colors
+# RED = (255, 0, 0)
+# GREEN = (0, 255, 0)
+# BLUE = (0, 0, 255)
+# BLACK = (0, 0, 0)
+# YELLOW = (255, 255, 0)
+# BROWN = (165, 42, 42)
+# WHITE = (255, 255, 255)
 
 # initialize pygame and create game window
 pygame.init()
 
 # pygame.mixer.init()
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-background = pygame.Surface(screen.get_size())
-pygame.display.set_caption('Space Force Prime')
-clock = pygame.time.Clock()
+# screen = pygame.display.set_mode((WIDTH, HEIGHT))
+# background = pygame.Surface(screen.get_size())
+# pygame.display.set_caption('Space Force Prime')
+# clock = pygame.time.Clock()
 
 #define resources
 bullet_img = pygame.image.load(path.join(img_dir, "bullet_short_single.png"))
