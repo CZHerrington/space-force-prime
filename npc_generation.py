@@ -5,14 +5,16 @@ from sprites import *
 
 # difficulty curve > 0.5 = less enemies
 # difficulty curve < 0.5 = less freindlies
-difficulty_curve = 0.5
 asteroid_num = 0
-
+score = 0
+difficulty_curve = max(0.8 - score/10, .1)
 # methods for generating npcs
 def new_npc():
     n = random.random()
-    if n > difficulty_curve: new_enemy()
-    else: new_friendly()
+    if n > difficulty_curve:
+        new_enemy()
+    else: 
+        new_friendly()
 
 def new_asteroid():
     asteroid = Asteroid()

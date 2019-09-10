@@ -19,6 +19,8 @@ class Player(pygame.sprite.Sprite):
         self.speedx = 0
         self.speedy = 0
         self.health = 100
+        self.shoot_delay = 500
+        self.last_shot = pygame.time.get_ticks()
         
     def reset(self):
         self.health = 100
@@ -37,6 +39,11 @@ class Player(pygame.sprite.Sprite):
             self.speedy = -10
         if keystate[pygame.K_DOWN]:
             self.speedy = 10
+        
+        if keystate[pygame.K_d]:
+            self.shoot()
+        if keystate[pygame.K_a]:
+            self.shoot_package()
         # self.rect.x += self.speedx
         # self.rect.y += self.speedy
         self.rect.move_ip(self.speedx, self.speedy)
@@ -50,13 +57,21 @@ class Player(pygame.sprite.Sprite):
             self.rect.bottom = HEIGHT
 
     def shoot(self):
-        projectile = Projectile(self.rect.centerx, self.rect.top)
-        all_sprites.add(projectile)
-        projectiles.add(projectile)
-        shoot_sound.play()
+        now = pygame.time.get_ticks()
+        if now - self.last_shot > self.shoot_delay:
+            self.last_shot = now
+
+            projectile = Projectile(self.rect.centerx, self.rect.top)
+            all_sprites.add(projectile)
+            projectiles.add(projectile)
+            shoot_sound.play()
 
     def shoot_package(self):
-        package = Package(self.rect.centerx, self.rect.top)
-        all_sprites.add(package)
-        packages.add(package)
-        shoot_package_sound.play()
+        now = pygame.time.get_ticks()
+        if now - self.last_shot > self.shoot_delay:
+            self.last_shot = now
+
+            package = Package(self.rect.centerx, self.rect.top)
+            all_sprites.add(package)
+            packages.add(package)
+            shoot_package_sound.play()

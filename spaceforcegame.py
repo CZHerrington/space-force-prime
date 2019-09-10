@@ -20,7 +20,7 @@ pygame.mixer.init()
 text_scroll.intro()
 
 player = Player()
-score = 0
+
 
 def game_over():
     screen.blit(game_over_img, (0, 0))
@@ -65,11 +65,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_d:
-                player.shoot()
-            if event.key == pygame.K_a:
-                player.shoot_package()
+       
 
     # update sprites
     all_sprites.update()
