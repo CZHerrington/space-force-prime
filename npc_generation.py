@@ -4,7 +4,7 @@ from settings import *
 from sprites import *
 
 # methods for generating npcs
-
+asteroid_num = 0
 def new_npc():
     n = random.random()
     if n > 0.5: new_enemy()
