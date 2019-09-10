@@ -2,7 +2,8 @@ import pygame
 import random
 from settings import *
 from sprites import *
-# generate random star
+# generate random stars
+
 def generate_stars(speed, radius, num):
     for i in range(num):
         w = random.randrange(0, WIDTH)
@@ -26,3 +27,7 @@ class Star(pygame.sprite.Sprite):
 
     def display(self, screen):
         pygame.draw.circle(screen, WHITE, (self.x, self.y), self.radius)
+
+generate_stars(4, 1, 100)
+generate_stars(6, 2, 10)
+generate_stars(8, 3, 5)

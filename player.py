@@ -19,6 +19,11 @@ class Player(pygame.sprite.Sprite):
         self.speedy = 0
         self.health = 100
         
+    def reset(self):
+        self.health = 100
+        self.rect.centerx = WIDTH / 2
+        self.rect.bottom = HEIGHT - 30
+
     def update(self):
         self.speedx = 0
         self.speedy = 0

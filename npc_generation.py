@@ -4,6 +4,11 @@ from settings import *
 from sprites import *
 
 # methods for generating npcs
+def new_asteroid():
+    asteroid = Asteroid()
+    all_sprites.add(asteroid)
+    asteroids.add(asteroid)
+
 def new_npc():
     n = random.random()
     if n > 0.5: new_enemy()
@@ -52,3 +57,10 @@ class Friendly(Npc):
         super().__init__()
         self.image = pygame.transform.scale(friendly_img, (50, 50))
         self.image = pygame.transform.rotate(self.image, 180)
+
+class Asteroid(Npc):
+    def __init__(self):
+        super().__init__()
+        n = random.randint(0,2)
+        asteroids = [asteroid1_img, asteroid2_img, asteroid3_img]
+        self.image = pygame.transform.scale(asteroids[n], (50, 50))
