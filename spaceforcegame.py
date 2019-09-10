@@ -1,5 +1,6 @@
 import pygame
 import random
+import text_scroll
 
 from os import path
 img_dir = path.join(path.dirname(__file__), 'img')
@@ -38,6 +39,8 @@ package_img = pygame.image.load(path.join(img_dir, 'package.png'))
 asteroid1 = pygame.image.load(path.join(img_dir, 'asteroid1.png'))
 asteroid2_img = pygame.image.load(path.join(img_dir, 'asteroid2.png'))
 asteroid3_img = pygame.image.load(path.join(img_dir, 'asteroid3.png'))
+instructions1 = pygame.image.load(path.join(img_dir, 'go_screen.png'))
+instructions2 = pygame.image.load(path.join(img_dir, 'howtoplay.png'))
 
 def new_npc():
     n = random.random()
@@ -59,11 +62,20 @@ def new_enemy():
 def show_go_screen():
     bg_rect = background.get_rect()
     screen.blit(background, bg_rect)
-    draw_text(screen, "Space Force Prime!", 64, WIDTH / 1.3, HEIGHT / 8)
-    draw_text(screen, "Arrow keys move, Space to fire", 22, WIDTH / 1.55, HEIGHT / 1.2)
-    draw_text(screen, "Press a key to begin", 22, WIDTH / 1.7, HEIGHT * 3.8 / 4)
-    logo_img_scaled = pygame.transform.scale(logo_img, (int(694 / 2), int(864 / 2)))
-    screen.blit(logo_img_scaled, (150, 150))
+    # draw_text(screen, "Space Force Prime!", 64, WIDTH / 1.3, HEIGHT / 8)
+    # draw_text(screen, "Arrow keys move, Space to fire", 22, WIDTH / 1.55, HEIGHT / 1.2)
+    # draw_text(screen, "Press a key to begin", 22, WIDTH / 1.7, HEIGHT * 3.8 / 4)
+    screen.blit(instructions1, (0, 0))
+    pygame.display.flip()
+    waiting = True
+    while waiting:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYUP:
+                waiting = False
+    screen.blit(instructions2, (0, 0))
     pygame.display.flip()
     waiting = True
     while waiting:
@@ -247,6 +259,9 @@ projectiles = pygame.sprite.Group()
 packages = pygame.sprite.Group()
 
 # Game initialization
+
+# game intro
+text_scroll.intro()
 show_go_screen()
 
 # Generate random stars

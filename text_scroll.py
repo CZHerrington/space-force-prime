@@ -52,9 +52,9 @@ def get_scroller():
 def get_screen(w,h):
     return pygame.display.set_mode((w,h), pygame.RESIZABLE)
 
-def main():
+def intro():
     pygame.init()
-    pygame.display.set_caption("scrolling message")
+    pygame.display.set_caption("Space Force Prime")
     SCROLL_EVENT = pygame.USEREVENT + 1
     scroller = get_scroller()
     pygame.time.set_timer(SCROLL_EVENT, 15)
@@ -69,6 +69,3 @@ def main():
             screen.fill((0, 0, 0))
             screen = {True: screen, False: None}[scroller.render(screen)]
             pygame.display.flip()
-    pygame.quit()
-
-main()
