@@ -57,7 +57,7 @@ def intro():
     pygame.display.set_caption("Space Force Prime")
     SCROLL_EVENT = pygame.USEREVENT + 1
     scroller = get_scroller()
-    pygame.time.set_timer(SCROLL_EVENT, 15)
+    pygame.time.set_timer(SCROLL_EVENT, 50)
     screen = get_screen(720,720)
     while screen:
         event = pygame.event.wait()
