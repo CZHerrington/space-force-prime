@@ -13,7 +13,7 @@ from start_screens import *
 # initialize pygame and create game window
 pygame.init()
 
-# pygame.mixer.init()
+pygame.mixer.init()
 
 # game intro
 text_scroll.intro()

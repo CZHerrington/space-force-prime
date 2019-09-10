@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from sprites import *
 from projectiles import *
+from sounds import *
 
 # class for ship controlled by player
 class Player(pygame.sprite.Sprite):
@@ -52,8 +53,10 @@ class Player(pygame.sprite.Sprite):
         projectile = Projectile(self.rect.centerx, self.rect.top)
         all_sprites.add(projectile)
         projectiles.add(projectile)
+        shoot_sound.play()
 
     def shoot_package(self):
         package = Package(self.rect.centerx, self.rect.top)
         all_sprites.add(package)
         packages.add(package)
+        shoot_package_sound.play()
