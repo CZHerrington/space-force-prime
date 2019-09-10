@@ -94,7 +94,7 @@ while running:
 
     asteroid_hits = pygame.sprite.groupcollide(asteroids, projectiles, False, True)
     for hit in asteroid_hits:
-                all_sprites.add(
+        all_sprites.add(
             Explosion(hit.rect.center, 'sm')
         )
 
@@ -109,6 +109,9 @@ while running:
     friendly_package_hits = pygame.sprite.groupcollide(deliveries, packages, True, True)
     for hit in friendly_package_hits:
         score += 1
+        all_sprites.add(
+            Explosion(hit.rect.center, 'laser')
+        )
         package_delivered_sound.play()
         new_npc()
 
