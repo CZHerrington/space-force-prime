@@ -8,6 +8,7 @@ def new_asteroid():
     asteroid = Asteroid()
     all_sprites.add(asteroid)
     asteroids.add(asteroid)
+    npcs.add(asteroid)
 
 def new_npc():
     n = random.random()
@@ -37,9 +38,9 @@ class Npc(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         self.rect.x = random.randrange(WIDTH - self.rect.width)
-        self.rect.y = -50
+        self.rect.y = -250
         self.rect.bottom = -20
-        self.speedy = 2
+        self.speedy = random.randrange(1, 5)
         self.speedx = random.randrange(-2, 2)
         
 
