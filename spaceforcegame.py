@@ -49,6 +49,7 @@ def game_over():
                     wait = False
 
 pygame.mixer.music.play(loops = -1)
+pygame.mixer.music.set_volume(0.6)
 show_go_screen()
 
 all_sprites.add(player)
@@ -119,7 +120,7 @@ while running:
         player.health -= 40
         new_npc()
         all_sprites.add(
-            Explosion(player.rect.center, 'sm')
+            Explosion(player.rect.center, 'laser')
         )
         if player.health <= 0:
             game_over()

@@ -26,7 +26,7 @@ class Package(Projectile):
         # self.image.fill((BROWN))
     #     self.rect.bottom = y
     #     self.rect.centerx = x
-        self.speedy = -4
+        self.speedy = -8
     # def update(self):
     #     # self.rect.y += self.speedy
     #     self.rect.move_ip(0, self.speedy)
