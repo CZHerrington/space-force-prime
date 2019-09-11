@@ -28,16 +28,18 @@ for i in range(9):
 
 # difficulty curve > 0.5 = less enemies
 # difficulty curve < 0.5 = less freindlies
-asteroid_num = 0
+# asteroid_num = 0
 score = 0
-difficulty_curve = max(0.8 - score/10, .1)
+difficulty_curve = max(0.7 - score/10, .1)
 # methods for generating npcs
 def new_npc():
     n = random.random()
     if n > difficulty_curve:
         new_enemy()
-    else: 
+    elif n < difficulty_curve and n > difficulty_curve /2:
         new_friendly()
+    elif n < difficulty_curve / 2:
+        new_asteroid()
 
 def new_asteroid():
     asteroid = Asteroid()
@@ -70,7 +72,7 @@ class Npc(pygame.sprite.Sprite):
         self.rect.x = random.randrange(WIDTH - self.rect.width)
         self.rect.y = -250
         self.rect.bottom = -20
-        self.speedy = random.randrange(1, 5)
+        self.speedy = random.randrange(4, 8)
         self.speedx = random.randrange(-2, 2)
         
 
@@ -88,6 +90,8 @@ class Friendly(Npc):
         super().__init__()
         self.image = pygame.transform.scale(friendly_img, (50, 50))
         self.image = pygame.transform.rotate(self.image, 180)
+        self.speedy = random.randrange(2, 5)
+        self.speedx = random.randrange(-2, 2)
 
 class Asteroid(Npc):
     def __init__(self):
@@ -95,6 +99,14 @@ class Asteroid(Npc):
         n = random.randint(0,2)
         asteroids = [asteroid1_img, asteroid2_img, asteroid3_img]
         self.image = pygame.transform.scale(asteroids[n], (50, 50))
+
+    def update(self):
+        # self.rect.x += self.speedx
+        # self.rect.y += self.speedy
+        self.rect.move_ip(self.speedx, self.speedy)
+        if self.rect.top > HEIGHT or self.rect.left < -50 or self.rect.right > WIDTH + 50:
+            self.kill()
+            new_npc()
 
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, center, size):

@@ -41,22 +41,22 @@ def game_over():
                         sprite.kill()
                     for sprite in asteroids:
                         sprite.kill()
-                    for i in range(10):
+                    for i in range(15):
                         new_npc()
-                    for i in range(5):
-                        new_asteroid()
-                    show_go_screen()
+                    # for i in range(5):
+                    #     new_asteroid()
+                    show_start_screen()
                     wait = False
 
 pygame.mixer.music.play(loops = -1)
-show_go_screen()
+show_start_screen()
 
 all_sprites.add(player)
-for i in range(10):
+for i in range(15):
     new_npc()
     
-for i in range(5):
-    new_asteroid()
+# for i in range(5):
+#     new_asteroid()
 
 # game loop
 running = True

@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 from sprites import *
-def show_go_screen():
+def show_start_screen():
     bg_rect = background.get_rect()
     screen.blit(background, bg_rect)
     # draw_text(screen, "Space Force Prime!", 64, WIDTH / 1.3, HEIGHT / 8)
