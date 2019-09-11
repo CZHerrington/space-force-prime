@@ -96,6 +96,10 @@ Good luck  ...and watch out for asteroids!
     <img src="read-me-assets/screenshot1.png" alt="Screenshot 1" width="500" height="500">
   </p>
 
+  <p align="center">
+    <img src="read-me-assets/screenshot2.png" alt="Screenshot 2" width="500" height="500">
+  </p>
+
 * Game Over
 
 <p align="center">
