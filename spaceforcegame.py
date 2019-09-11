@@ -37,6 +37,10 @@ def game_over():
                     pygame.quit()
                 elif event.key==pygame.K_RETURN:
                     player.reset()
+                    for sprite in projectiles:
+                        sprite.kill()
+                    for sprite in packages:
+                        sprite.kill()
                     for sprite in npcs:
                         sprite.kill()
                     for sprite in asteroids:
@@ -119,7 +123,7 @@ while running:
         player.health -= 40
         new_npc()
         all_sprites.add(
-            Explosion(player.rect.center, 'sm')
+            Explosion(player.rect.center, 'laser')
         )
         if player.health <= 0:
             game_over()
