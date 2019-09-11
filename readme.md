@@ -82,20 +82,22 @@ Good luck  ...and watch out for asteroids!
 
 * Introduction Screens:
 <p align="center">
-    <img src="read-me-assets/go_screen.png" alt="Logo" width="500" height="500">
+    <img src="read-me-assets/go_screen.png" alt="Go Screen" width="500" height="500">
   </p>
 
   <p align="center">
-    <img src="read-me-assets/howtoplay.png" alt="Logo" width="500" height="500">
+    <img src="read-me-assets/howtoplay.png" alt="How To Play" width="500" height="500">
   </p>
 
 
 * Gameplay
 
-![Gameplay](./read-me-assets/search-screen-mobile.png)
+<p align="center">
+    <img src="read-me-assets/screenshot1.png" alt="Screenshot 1" width="500" height="500">
+  </p>
 
 * Game Over
 
 <p align="center">
-    <img src="read-me-assets/game_over.png" alt="Logo" width="500" height="500">
+    <img src="read-me-assets/game_over.png" alt="Game Over" width="500" height="500">
   </p>
