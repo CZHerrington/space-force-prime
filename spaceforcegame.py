@@ -37,6 +37,10 @@ def game_over():
                     pygame.quit()
                 elif event.key==pygame.K_RETURN:
                     player.reset()
+                    for sprite in projectiles:
+                        sprite.kill()
+                    for sprite in packages:
+                        sprite.kill()
                     for sprite in npcs:
                         sprite.kill()
                     for sprite in asteroids:
