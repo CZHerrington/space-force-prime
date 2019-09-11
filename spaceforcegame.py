@@ -23,6 +23,7 @@ player = Player()
 
 
 def game_over():
+    enemy_count = 15
     screen.blit(game_over_img, (0, 0))
     draw_text(screen, 'SCORE: ' + str(score), 32, WIDTH - 70, 10)
     pygame.display.flip()
@@ -45,10 +46,6 @@ def game_over():
                         sprite.kill()
                     for sprite in asteroids:
                         sprite.kill()
-                    for i in range(15):
-                        new_npc()
-                    # for i in range(5):
-                    #     new_asteroid()
                     show_start_screen()
                     wait = False
 
@@ -56,20 +53,28 @@ pygame.mixer.music.play(loops = -1)
 show_start_screen()
 
 all_sprites.add(player)
-for i in range(15):
-    new_npc()
-    
-# for i in range(5):
-#     new_asteroid()
+# for i in range(15):
+#     new_npc()
 
 # game loop
+enemy_count = 15
+last_spawn = 0
+spawn_delay = 0
 running = True
+
 while running:
     clock.tick(FPS)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-       
+    
+    now = pygame.time.get_ticks()
+    if (now - spawn_delay) >= last_spawn and enemy_count > 0:
+        new_npc()
+        spawn_delay = random.randint(0, 3000)
+        enemy_count -= 1
+        last_spawn = now
+    # staggered spawn
 
     # update sprites
     all_sprites.update()
@@ -126,6 +131,7 @@ while running:
             Explosion(player.rect.center, 'laser')
         )
         if player.health <= 0:
+            enemy_count = 15
             game_over()
             score = 0
 
