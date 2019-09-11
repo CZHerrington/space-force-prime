@@ -27,3 +27,5 @@ asteroids = pygame.sprite.Group()
 
 projectiles = pygame.sprite.Group()
 packages = pygame.sprite.Group()
+
+explosions = pygame.sprite.Group()

@@ -39,6 +39,8 @@ def game_over():
                     pygame.quit()
                 elif event.key==pygame.K_RETURN:
                     player.reset()
+                    for sprite in explosions:
+                        sprite.kill()
                     for sprite in projectiles:
                         sprite.kill()
                     for sprite in packages:
@@ -86,26 +88,26 @@ while running:
     enemy_hits = pygame.sprite.groupcollide(enemies, projectiles, True, True)
     for hit in enemy_hits:
         weapon_hit_sound.play()
-        all_sprites.add(
-            Explosion(hit.rect.center, 'lg')
-        )
+        exp = Explosion(hit.rect.center, 'lg')
+        all_sprites.add(exp)
+        explosions.add(exp)
         score += 1
         new_npc()
 
     friendly_hits = pygame.sprite.groupcollide(deliveries, projectiles, True, True)
     for hit in friendly_hits:
-        all_sprites.add(
-            Explosion(hit.rect.center, 'lg')
-        )
+        exp = Explosion(hit.rect.center, 'lg')
+        all_sprites.add(exp)
+        explosions.add(exp)
         score -= 1
         weapon_hit_sound.play()
         new_npc()
 
     asteroid_hits = pygame.sprite.groupcollide(asteroids, projectiles, False, True)
     for hit in asteroid_hits:
-        all_sprites.add(
-            Explosion(hit.rect.center, 'sm')
-        )
+        exp = Explosion(hit.rect.center, 'sm')
+        all_sprites.add(exp)
+        explosions.add(exp)
         weapon_hit_sound.play()
 
     pygame.sprite.groupcollide(asteroids, packages, False, True)
@@ -119,9 +121,9 @@ while running:
     friendly_package_hits = pygame.sprite.groupcollide(deliveries, packages, True, True)
     for hit in friendly_package_hits:
         score += 1
-        all_sprites.add(
-            StarExplosion(hit.rect.center)
-        )
+        exp = StarExplosion(hit.rect.center)
+        all_sprites.add(exp)
+        explosions.add(exp)
         package_delivered_sound.play()
         new_npc()
 
@@ -131,9 +133,9 @@ while running:
         asteroid_collision_sound.play()
         player.health -= 40
         new_npc()
-        all_sprites.add(
-            Explosion(player.rect.center, 'laser')
-        )
+        exp = Explosion(player.rect.center, 'laser')
+        all_sprites.add(exp)
+        explosions.add(exp)
         if player.health <= 0:
             enemy_count = 15
             game_over()
