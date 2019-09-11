@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/CZHerrington/space-force-prime">
-    <img src="read-me-assets/spaceforcelogo.png" alt="Logo" width="200" height="250">
+    <img src="read-me-assets/spaceforcelogo.png" alt="Logo" width="250" height="313">
   </a></p>
 <!-- ![Home Page](./read-me-assets/spaceforcelogo.png) -->
 
@@ -80,11 +80,15 @@ Good luck  ...and watch out for asteroids!
 
 ## Screenshots
 
-* Introduction Screens
+* Introduction Screens:
+<p align="center">
+    <img src="read-me-assets/go_screen.png" alt="Logo" width="500" height="500">
+  </p>
 
-![Intro Screen](./read-me-assets/go_sreen.png)
+  <p align="center">
+    <img src="read-me-assets/howtoplay.png" alt="Logo" width="500" height="500">
+  </p>
 
-![How to play](./read-me-assets/howtoplay.png)
 
 * Gameplay
 
@@ -92,4 +96,6 @@ Good luck  ...and watch out for asteroids!
 
 * Game Over
 
-![Gameplay](./read-me-assets/game_over.png)
+<p align="center">
+    <img src="read-me-assets/game_over.png" alt="Logo" width="500" height="500">
+  </p>
