@@ -50,6 +50,8 @@ def game_over():
                     wait = False
 
 pygame.mixer.music.play(loops = -1)
+pygame.mixer.music.set_volume(0.6)
+
 show_start_screen()
 
 all_sprites.add(player)
