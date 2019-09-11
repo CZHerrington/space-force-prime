@@ -118,6 +118,9 @@ while running:
         asteroid_collision_sound.play()
         player.health -= 40
         new_npc()
+        all_sprites.add(
+            Explosion(player.rect.center, 'sm')
+        )
         if player.health <= 0:
             game_over()
             score = 0
