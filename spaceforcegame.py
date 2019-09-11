@@ -118,7 +118,7 @@ while running:
     for hit in friendly_package_hits:
         score += 1
         all_sprites.add(
-            Explosion(hit.rect.center, 'laser')
+            StarExplosion(hit.rect.center)
         )
         package_delivered_sound.play()
         new_npc()

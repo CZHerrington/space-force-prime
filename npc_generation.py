@@ -9,6 +9,14 @@ explosion_anim = {}
 explosion_anim['lg'] = []
 explosion_anim['sm'] = []
 explosion_anim['laser'] = []
+explosion_anim['stars'] = []
+
+for i in range(10):
+    filename = 'stars{}.png'.format(i + 1)
+    img = pygame.image.load(path.join(img_dir, filename)).convert()
+    img.set_colorkey(BLACK)
+    img_lg = pygame.transform.scale(img, (100, 20))
+    explosion_anim['stars'].append(img_lg)
 
 for i in range(8):
     filename = 'explosion{}.png'.format(i + 1)
@@ -132,3 +140,21 @@ class Explosion(pygame.sprite.Sprite):
                 self.rect = self.image.get_rect()
                 self.rect.center = center
 
+class StarExplosion(Explosion):
+    def __init__(self, center):
+        super().__init__(center, 'stars')
+        self.frame_rate = 90
+        self.rating = random.randint(5, 10)
+    
+    def update(self):
+        now = pygame.time.get_ticks()
+        if now - self.last_update > self.frame_rate:
+            self.last_update = now
+            self.frame += 1
+            if self.frame == self.rating:
+                self.kill()
+            else:
+                center = self.rect.center
+                self.image = explosion_anim[self.size][self.frame]
+                self.rect = self.image.get_rect()
+                self.rect.center = center
