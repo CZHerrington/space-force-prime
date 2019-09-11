@@ -1,6 +1,10 @@
 # Space Force Prime - pygame Project
 
-![Home Page](./read-me-assets/spaceforcelogo.png)
+<p align="center">
+  <a href="https://github.com/CZHerrington/space-force-prime">
+    <img src="read-me-assets/spaceforcelogo.png" alt="Logo" width="200" height="250">
+  </a></p>
+<!-- ![Home Page](./read-me-assets/spaceforcelogo.png) -->
 
 ## Contents
     -Description & Game Design
