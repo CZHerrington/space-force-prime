@@ -10,6 +10,7 @@ from projectiles import *
 from player import *
 from start_screens import *
 from sounds import *
+from explosions import *
 
 # initialize pygame and create game window
 pygame.init()
@@ -105,6 +106,7 @@ while running:
         all_sprites.add(
             Explosion(hit.rect.center, 'sm')
         )
+        weapon_hit_sound.play()
 
     pygame.sprite.groupcollide(asteroids, packages, False, True)
 
